@@ -3,9 +3,10 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import ProductDetails from "./productdetails";
 import ProductForm from "./product";
+import API_URL from "./config";
 import './App.css';
 
-const API_URL = "http://localhost:3000/api/auth";
+const APIURL = `${API_URL}/api/auth`;
 
 function App() {
     const [isLogin, setIsLogin] = useState(true);
@@ -35,7 +36,7 @@ function App() {
                 ? { email, password }
                 : { name, email, password };
 
-            const response = await fetch(`${API_URL}${endpoint}`, {
+            const response = await fetch(`${APIURL}${endpoint}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

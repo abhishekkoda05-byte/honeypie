@@ -1,6 +1,7 @@
 import {  useState } from  "react" ;
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import API_URL from "./config";
 
 
 function productForm({currentUser}) {
@@ -14,7 +15,7 @@ function productForm({currentUser}) {
    useEffect(() => {
      async function displayProducts(){
         try{
-            const response = await fetch("http://localhost:3000/product");
+            const response = await fetch(`${API_URL}/product`);
             const data = await response.json();
 
             if(!response.ok){
@@ -45,7 +46,7 @@ try{
         newdata.append("images", file);
       });
 
-      const response = await fetch("http://localhost:3000/product/upload", {
+      const response = await fetch(`${API_URL}/product/upload`, {
         method: "POST",
           headers: {
         Authorization: `Bearer ${localStorage.getItem("honeypieToken")}`
@@ -74,7 +75,7 @@ try{
     async function handleDelete(id){
         setdeleteing(true);
         try{
-           const response = await fetch(`http://localhost:3000/product/${id}`, {
+           const response = await fetch(`${API_URL}/product/${id}`, {
             method:"DELETE",
             headers: {
                 Authorization : `Bearer ${localStorage.getItem("honeypieToken")}`
