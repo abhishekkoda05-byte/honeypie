@@ -10,7 +10,7 @@ app.use(express.json());
 app.use("/api/auth", register);
 app.use("/product", product);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 async function  startServer(){
     await connect();
