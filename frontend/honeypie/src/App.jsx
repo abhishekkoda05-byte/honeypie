@@ -1,10 +1,19 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import ProductDetails from "./productdetails";
 import ProductForm from "./product";
 import API_URL from "./config";
-import './App.css';
+import Owner from "./owner";
+import './css/App.css';
+import InComing from "./incoming";
+import socket from "./socket.io/socket"
+import Profile from "./profile"
+import Home from "./home"
+import Chat from "./chat"
+import Outgoing from "./outgoing";
+import CheckHistory from "./history";
+import Inbox from "./Inbox"
 
 const APIURL = `${API_URL}/api/auth`;
 
@@ -85,7 +94,29 @@ function App() {
         setPassword("");
         setMessage("");
         setIsLogin(true);
-    }
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem("honeypieToken");
+        if(!currentUser || !token){
+            return ;
+        };
+        socket.auth = { token };
+        socket.connect();
+
+        socket.on("connect", () => {
+            console.log("Socket connected : ", socket.id)
+        });
+
+        socket.on("connect_error", (error) => {
+            console.log(error.message);
+        });
+        return () => {
+            socket.off("connect");
+            socket.off("connect_error");
+            socket.disconnect();
+        }
+    } , [currentUser]);
 
     return (
         <Routes>
@@ -97,9 +128,9 @@ function App() {
                     <div className="app-container">
 
                         {currentUser ? (
-                            <>
-                                <ProductForm currentUser={currentUser} />
-
+                            <> 
+                                <Home/>
+                            
                                 <button
                                     className="logout-button"
                                     onClick={handleLogout}
@@ -241,6 +272,17 @@ function App() {
                 path="/products/:id"
                 element={<ProductDetails />}
             />
+            <Route
+                path="/products"
+                element={<ProductForm currentUser={currentUser} />}
+            />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/Incoming" element={<InComing />} />
+            <Route path="/outgoing" element={<Outgoing />} />
+            <Route path="/history" element={<CheckHistory />} />
+            <Route path="/chat/:userId" element={<Chat />} />
+            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/owner/:id" element={<Owner  currentUser={currentUser} /> } />
 
         </Routes>
     );

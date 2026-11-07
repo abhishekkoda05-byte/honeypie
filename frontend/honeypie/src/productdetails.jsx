@@ -1,59 +1,146 @@
+
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import API_URL from "./config"
+import { useParams, Link, useNavigate } from "react-router-dom";
 
-function productDetails(){
+import API_URL from "./config";
+import "./css/productdetails.css";
+
+function ProductDetails({ currentUser }) {
     const { id } = useParams();
-    const [products, setproducts ] = useState(null);
-    const [ loading, setloading ] = useState(true);
-    const [ error, seterror ] = useState("");
+    const navigate = useNavigate();
 
+    const [product, setProduct] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(0);
+    const [loading, setLoading] = useState(true);
+  
+
+    // Fetch individual product
     useEffect(() => {
-        async function fetchProduct(){
-            try{
-                const response = await fetch(`${API_URL}/product/products/${id}`);
+        async function fetchProduct() {
+            try {
+                const response = await fetch(
+                    `${API_URL}/product/products/${id}`
+                );
 
                 const data = await response.json();
-                if(!response.ok){
-                    return seterror(data.message);
-                }
-                setproducts(data.existingproduct);
 
-            }catch(error){
+                if (!response.ok) {
+                    throw new Error(data.message || "Product not found");
+                }
+
+                setProduct(data.existingproduct);
+            } catch (error) {
                 console.error(error.message);
-                seterror(error.message);
-            }finally{
-                setloading(false);
+            } finally {
+                setLoading(false);
             }
         }
+
         fetchProduct();
     }, [id]);
-    if(loading){
-        return ( <>
-         <h1>loading...</h1>
-        </>) ;
+    if (loading) {
+        return <h2 className="details-status">Loading product...</h2>;
     }
-    if(error){
-        return ( <>
-         <h1>{error}</h1>
-        </>)
-    } 
-    return ( 
-        <>
-        <h1>Product Details</h1>
-          {products?.images?.map((image, index) => (
-        <img
-            key={index}
-            src={image.imageUrl}
-            alt={`${products.title} - image ${index + 1}`}
-            width="200"
-        />
-    ))}
-         <h1>{products.title}</h1>
-         <h2>{products.price}</h2>
-         <p>{products.description}</p>
-        </>
+
+    if (!product) {
+        return <h2 className="details-status">Product not found</h2>;
+    }
+
+    const isOwner =
+        currentUser &&
+        product.owner?.toString() === currentUser._id?.toString();
+
+    return (
+        <div className="product-details">
+
+            <Link className="details-back-link" to="/">← Back to products</Link>
+
+            <div className="details-container">
+
+                {/* Product Images */}
+                <div className="details-images">
+
+                    <img
+                        className="hero-image details-main-image"
+                        src={product.images?.[selectedImage]?.imageUrl}
+                        alt={product.title}
+                        width = "150"
+                    />
+
+                    <div className="thumbnail-container">
+                        {product.images?.slice(0, 5).map((image, index) => (
+                            <img
+                                key={index}
+                                src={image.imageUrl}
+                                alt={`${product.title} ${index + 1}`}
+                                onClick={() => setSelectedImage(index)}
+                                className={
+                                    selectedImage === index
+                                        ? "details-thumbnail active-thumbnail"
+                                        : "details-thumbnail thumbnail"
+                                }
+                                width ="150"
+                            />
+                        ))}
+                    </div>
+
+                </div>
+
+                {/* Product Information */}
+                <div className="details-info">
+
+                    <h1 className="details-title">{product.title}</h1>
+
+                    <h2 className="details-price">₹{product.price}</h2>
+
+                    <div className="details-meta-row">
+                        <p className="details-meta"><strong>Brand:</strong> {product.brand}</p>
+
+                        <p className="details-meta"><strong>Size:</strong> {product.size}</p>
+                    </div>
+
+                    <p className="details-description">description :{product.description}</p>
+
+                    <div className="details-actions">
+                        {!isOwner && (
+                            <button
+                                className="details-swap-button"
+                                onClick={() => {
+                                    const ownerId =
+                                        typeof product.owner === "object"
+                                            ? product.owner?._id
+                                            : product.owner;
+
+                                    navigate(`/owner/${ownerId}`, {
+                                        state: {
+                                            requestedProductId: product._id
+                                        }
+                                    });
+                                }}
+                            >
+                                Swap
+                            </button>
+                        )}
+                           <button
+                                className="details-chat-button"
+                                onClick={() => {
+                                    const ownerId =
+                                        typeof product.owner === "object"
+                                            ? product.owner?._id
+                                            : product.owner;
+
+                                    navigate(`/chat/${ownerId}`);
+                                }}
+                            >
+                                Chat with Owner
+                     </button>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
     );
 }
 
-export default productDetails;
+export default ProductDetails;

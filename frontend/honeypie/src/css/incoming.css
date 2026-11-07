@@ -1,0 +1,297 @@
+.incoming-page {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(20px, 3vw, 40px) clamp(16px, 3vw, 32px) 72px;
+}
+
+.incoming-header {
+  margin-bottom: clamp(20px, 3vw, 28px);
+}
+
+.incoming-heading {
+  color: var(--orange);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.incoming-subtitle {
+  max-width: 60ch;
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.incoming-empty {
+  padding: 32px 20px;
+  border: 1px dashed var(--card-border);
+  border-radius: 16px;
+  background: var(--input-bg);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.incoming-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.incoming-card {
+  padding: clamp(18px, 2.5vw, 26px);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 2px 10px rgba(28, 28, 34, 0.04);
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.incoming-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232, 89, 12, 0.3);
+  box-shadow: 0 14px 32px rgba(28, 28, 34, 0.1);
+}
+
+.incoming-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.incoming-requester {
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.incoming-status {
+  padding: 5px 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: var(--input-bg);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.incoming-status-pending {
+  border-color: rgba(234, 179, 8, 0.35);
+  background: rgba(234, 179, 8, 0.14);
+  color: #a16207;
+}
+
+.incoming-status-accepted {
+  border-color: rgba(22, 163, 74, 0.3);
+  background: rgba(22, 163, 74, 0.12);
+  color: #15803d;
+}
+
+.incoming-status-rejected {
+  border-color: rgba(220, 38, 38, 0.3);
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+.incoming-products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 22px);
+  margin-top: 18px;
+}
+
+.incoming-product {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  background: var(--input-bg);
+}
+
+.incoming-product-requested {
+  border-color: rgba(232, 89, 12, 0.25);
+  background: rgba(232, 89, 12, 0.06);
+}
+
+.incoming-product-label {
+  margin-bottom: 2px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.incoming-product-requested .incoming-product-label {
+  color: var(--orange-dark);
+}
+
+.incoming-product-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.incoming-product-title {
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.incoming-product-price {
+  color: var(--orange);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.incoming-product-unavailable {
+  padding: 12px 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.incoming-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--card-border);
+}
+
+.incoming-accept-button,
+.incoming-reject-button,
+.incoming-chat-button {
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease,
+    background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    filter 0.2s ease;
+}
+
+.incoming-accept-button {
+  border: none;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.28);
+}
+
+.incoming-accept-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 10px 24px rgba(22, 163, 74, 0.4);
+}
+
+.incoming-reject-button {
+  border: 1.5px solid rgba(220, 38, 38, 0.4);
+  background: #ffffff;
+  color: #dc2626;
+}
+
+.incoming-reject-button:hover {
+  transform: translateY(-2px);
+  border-color: #dc2626;
+  background: #dc2626;
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(220, 38, 38, 0.3);
+}
+
+.incoming-chat-button {
+  border: none;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(232, 89, 12, 0.28);
+}
+
+.incoming-chat-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 10px 24px rgba(232, 89, 12, 0.4);
+}
+
+.incoming-accept-button:active,
+.incoming-reject-button:active,
+.incoming-chat-button:active {
+  transform: translateY(0);
+}
+
+.incoming-accept-button:focus-visible,
+.incoming-reject-button:focus-visible,
+.incoming-chat-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(232, 89, 12, 0.25);
+}
+
+.incoming-status-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+@media (max-width: 720px) {
+  .incoming-products {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .incoming-page {
+    padding: 16px 14px 56px;
+  }
+
+  .incoming-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .incoming-products {
+    margin-top: 14px;
+  }
+
+  .incoming-actions {
+    flex-direction: column;
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+
+  .incoming-accept-button,
+  .incoming-reject-button,
+  .incoming-chat-button {
+    width: 100%;
+    padding: 13px 20px;
+  }
+}

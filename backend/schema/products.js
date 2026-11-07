@@ -6,6 +6,16 @@ const product = new mongoose.Schema({
         required: true
     },
 
+      size: {
+        type: String,
+        required: true
+    },
+
+      brand: {
+        type: String,
+        required: true
+    },
+
     price: {
         type: Number,
         required: true
@@ -33,6 +43,10 @@ const product = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
         required: true
+    },
+    available : {
+        type : Boolean ,
+        default : true
     }
 });
 

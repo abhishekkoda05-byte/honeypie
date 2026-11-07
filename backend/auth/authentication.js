@@ -63,14 +63,13 @@ router.post("/login", async (req, res) => {
        if(!userpass){
         return res.status(401).json({message:"incorrect password"});
        }
-       const token = jwt.sign({id:existinguser._id}, process.env.JWT_SECRET, {expiresIn : "1d"});
+       const token = jwt.sign({id:existinguser._id}, process.env.JWT_SECRET, {expiresIn : "7d"});
         return res.status(201).json({message :"login successfully", token ,
              user:{name:existinguser.name, email:existinguser.email, _id:existinguser._id}});
     }catch(error){
         console.error(error.message);
         return res.status(500).json({message:"server not found"});
     }
-})
-
+});
 module.exports = router;
 

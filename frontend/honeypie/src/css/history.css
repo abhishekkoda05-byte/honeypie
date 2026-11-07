@@ -1,0 +1,206 @@
+.history-page {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(20px, 3vw, 40px) clamp(16px, 3vw, 32px) 72px;
+}
+
+.history-header {
+  margin-bottom: clamp(20px, 3vw, 28px);
+}
+
+.history-heading {
+  color: var(--orange);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.history-subtitle {
+  max-width: 60ch;
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.history-empty {
+  padding: 32px 20px;
+  border: 1px dashed var(--card-border);
+  border-radius: 16px;
+  background: var(--input-bg);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.history-card {
+  padding: clamp(18px, 2.5vw, 26px);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 2px 10px rgba(28, 28, 34, 0.04);
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.history-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232, 89, 12, 0.3);
+  box-shadow: 0 14px 32px rgba(28, 28, 34, 0.1);
+}
+
+.history-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.history-users {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.history-user {
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.history-status {
+  padding: 5px 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: var(--input-bg);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.history-status-completed,
+.history-status-accepted {
+  border-color: rgba(22, 163, 74, 0.3);
+  background: rgba(22, 163, 74, 0.12);
+  color: #15803d;
+}
+
+.history-status-pending {
+  border-color: rgba(234, 179, 8, 0.35);
+  background: rgba(234, 179, 8, 0.14);
+  color: #a16207;
+}
+
+.history-status-rejected {
+  border-color: rgba(220, 38, 38, 0.3);
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+.history-products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 22px);
+  margin-top: 18px;
+}
+
+.history-product {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  background: var(--input-bg);
+}
+
+.history-product-requested {
+  border-color: rgba(232, 89, 12, 0.25);
+  background: rgba(232, 89, 12, 0.06);
+}
+
+.history-product-label {
+  margin-bottom: 2px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.history-product-requested .history-product-label {
+  color: var(--orange-dark);
+}
+
+.history-product-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.history-product-title {
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.history-status-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+@media (max-width: 720px) {
+  .history-products {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .history-page {
+    padding: 16px 14px 56px;
+  }
+
+  .history-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .history-products {
+    margin-top: 14px;
+  }
+
+  .history-product-image {
+    max-height: 240px;
+  }
+}
