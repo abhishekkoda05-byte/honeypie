@@ -20,6 +20,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//health check for render and cron-job
+app.get("/health", (req, res) => {
+   try{
+     res.status(200).json({
+        status:"ok",
+        message:"honeypie is running"
+    })
+   }catch(error){
+    console.error(error.message);
+   }
+})
+
 
 app.use("/api/auth", register);
 app.use("/product", product);
