@@ -2,7 +2,7 @@
 
 **Honeypie** is a clothing exchange and swap marketplace where users can list their pre-loved clothes, explore products uploaded by others, and exchange clothing through a simple swap system.
 
-&#x20;**Live Website:** [https://honeypie-tawny.vercel.app/](https://honeypie-tawny.vercel.app/)
+&#x20;**Live Website:** honeypie-tawny.vercel.app
 
 ## &#x20;Features
 
@@ -45,7 +45,7 @@
 
 ## &#x20;Live Demo
 
-Visit Honeypie: [https://honeypie-tawny.vercel.app/](https://honeypie-tawny.vercel.app/)
+Visit Honeypie: honeypie-tawny.vercel.app
 
 ## &#x20;Project Objective
 
